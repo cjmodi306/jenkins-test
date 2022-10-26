@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'echo "Starting ROS environment..."'
-                sh 'echo "${env.WORKSPACE}"'
+                sh 'echo ${WORKSPACE}'
 
             }
         }
