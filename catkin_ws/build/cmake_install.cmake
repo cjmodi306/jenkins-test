@@ -131,7 +131,8 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/fgvt/jenkins-test/catkin_ws/build/gtest/cmake_install.cmake")
-  include("/home/fgvt/jenkins-test/catkin_ws/build/rostest/cmake_install.cmake")
+  include("/home/fgvt/jenkins-test/catkin_ws/build/test/cmake_install.cmake")
+  include("/home/fgvt/jenkins-test/catkin_ws/build/fgvt-object-detection/yolo_object_detector/cmake_install.cmake")
 
 endif()
 

@@ -18,9 +18,9 @@ pipeline {
 
            	 }
 	post{
+		always{junit  'build/reports/**/*.xml'}
 		success{echo 'Catkin Build is successful.'}
 		failure{echo 'Catkin build is unsuccessful.'}
-		always{echo 'End of Build process.'}
 	    }
         }
     }

@@ -5,4 +5,5 @@
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
-subdirs("rostest")
+subdirs("test")
+subdirs("fgvt-object-detection/yolo_object_detector")
