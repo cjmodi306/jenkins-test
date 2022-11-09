@@ -7,15 +7,13 @@ pipeline {
                 sh '''echo ${WORKSPACE}
                     echo "Executing multiple lines..."
                     '''
-
-            }
-            steps {
                 retry(3){
                     sh "./test_shell_script.sh"
                 }
                 timeout(time:10, unit:'SECONDS'){
                     sh './timeout_script.sh'
                 }
+
             }
         }
     }
