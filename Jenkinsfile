@@ -18,7 +18,7 @@ pipeline {
 
            	 }
 	post{
-		sucess{echo 'Catkin Build is successful.'}
+		success{echo 'Catkin Build is successful.'}
 		failure{echo 'Catkin build is unsuccessful.'}
 		always{echo 'End of Build process.'}
 	    }
