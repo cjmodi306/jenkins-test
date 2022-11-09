@@ -1,1 +1,2 @@
 echo 'This is test shell script'
+echo 'ls'
