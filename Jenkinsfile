@@ -18,7 +18,10 @@ pipeline {
 
            	 }
 	post{
-		always{junit  'catkin_ws/results/**/*.xml'}
+		always{
+		archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+		junit  'catkin_ws/results/**/*.xml'
+		}
 		success{echo 'Catkin Build is successful.'}
 		failure{echo 'Catkin build is unsuccessful.'}
 	    }
