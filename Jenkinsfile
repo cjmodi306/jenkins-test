@@ -11,12 +11,17 @@ pipeline {
                 sh 'sudo chmod +x timeout_script.sh'
                 retry(3){
                     sh "./test_shell_script.sh"
-                }
+               		 }
                 timeout(time:10, unit:'SECONDS'){
                     sh './timeout_script.sh'
-                }
+               					 }
 
-            }
+           	 }
+	post{
+		sucess{echo 'Catkin Build is successful.'}
+		failure{echo 'Catkin build is unsuccessful.'}
+		always{echo 'End of Build process.'}
+	    }
         }
     }
 }
