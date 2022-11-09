@@ -19,10 +19,14 @@ pipeline {
            	 }
 	post{
 		always{
-		archiveArtifacts artifacts: 'catkin_ws/results/*.jar', fingerprint: true
-		junit  'catkin_ws/results/*.xml'
+		echo 'Process completed.'
 		}
-		success{echo 'Catkin Build is successful.'}
+		success{
+			echo 'Catkin Build is successful.'
+			mail to: 'ftb.chirag.modi@htwsaar.de',
+             			subject: "Pipeline Successful: ${currentBuild.fullDisplayName}",
+             			body: "Success with ${env.BUILD_URL}"
+		       }
 		failure{echo 'Catkin build is unsuccessful.'}
 	    }
         }
