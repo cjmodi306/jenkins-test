@@ -11,12 +11,17 @@ pipeline {
                 sh 'sudo chmod +x timeout_script.sh'
                 retry(3){
                     sh "./test_shell_script.sh"
-               		 }
+                 }
                 timeout(time:10, unit:'SECONDS'){
                     sh './timeout_script.sh'
-               					 }
+                }
 
-           	 }
+            }
+           stage('test'){
+           	echo ''Starting test...'
+           
+           
+           }
 	post{
 		always{
 		echo 'Process completed.'
