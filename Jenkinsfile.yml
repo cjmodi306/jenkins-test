@@ -4,7 +4,6 @@ pipeline:
  stages:
   - stage: 'Cloning'
     steps:
-     - cleanWS()
      - sh "echo 'Cloning into ros_ws'"
      - sh 'git clone https://github.com/cjmodi306/ros_ws.git'
   - stage: 'Build'
