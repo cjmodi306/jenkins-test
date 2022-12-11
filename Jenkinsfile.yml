@@ -1,0 +1,10 @@
+pipeline:
+ agent:
+  any:
+ stages:
+  - stage: 'Build'
+    steps:
+     - sh "echo 'Building ROS packages...'"
+     - sh 'catkin_make'
+     - sh "echo 'Done.'"
+		
