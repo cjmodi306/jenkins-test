@@ -8,6 +8,7 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/modi/ros_ws/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/modi/ros_ws/devel/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/home/modi/catkin_ws/devel/lib/pkgconfig:/home/modi/jetson_ws/devel/lib/pkgconfig:/opt/ros/noetic/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD='/home/modi/ros_ws/build'
 export ROSLISP_PACKAGE_DIRECTORIES="/home/modi/ros_ws/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
