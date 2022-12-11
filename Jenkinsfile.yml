@@ -9,4 +9,5 @@ pipeline:
   - stage: 'Build'
     steps:
      - sh 'cd ros_ws'
+     - sh '/opt/ros/noetic/setup.bash'
      - sh 'catkin_make'
