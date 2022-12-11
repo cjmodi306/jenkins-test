@@ -2,8 +2,10 @@ pipeline:
  agent:
   any:
  stages:
+  - stage: 'Cloning'
+    steps:
+     - sh "echo 'Cloning into ros_ws'"
+     - sh 'git clone https://github.com/cjmodi306/ros_ws.git'
   - stage: 'Build'
     steps:
-     - sh "echo 'Building ROS packages...'"
      - sh 'catkin_make'
-     - sh "echo 'Done.'"
