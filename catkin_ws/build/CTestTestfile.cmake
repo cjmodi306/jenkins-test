@@ -1,9 +1,0 @@
-# CMake generated Testfile for 
-# Source directory: /home/fgvt/jenkins-test/catkin_ws/src
-# Build directory: /home/fgvt/jenkins-test/catkin_ws/build
-# 
-# This file includes the relevant testing commands required for 
-# testing this directory and lists subdirectories to be tested as well.
-subdirs("gtest")
-subdirs("test")
-subdirs("fgvt-object-detection/yolo_object_detector")

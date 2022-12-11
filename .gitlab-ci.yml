@@ -1,0 +1,81 @@
+# The following block is needed for the shared Docker-based runner
+# For local runners you might want to enable the overlay driver:
+# https://docs.gitlab.com/ce/ci/docker/using_docker_build.html#using-the-overlayfs-driver
+
+image: docker:git # docker and git clients
+
+# The docker runner does not expose /tmp to the docker-in-docker service
+# This config ensures that the temp folder is located inside the project directory (e.g. for prerelease tests or SSH agent forwarding)
+variables:
+  TMPDIR: "${CI_PROJECT_DIR}.tmp" #
+  CCACHE_DIR: ${CI_PROJECT_DIR}/ccache
+
+cache:
+  key: "${CI_JOB_NAME}" # https://docs.gitlab.com/ee/ci/caching/#sharing-caches-across-different-branches
+  paths:
+    - ccache
+
+# enable docker-in-docker
+services:
+  - docker:19.03.5-dind
+
+before_script:
+  - apk add --update bash coreutils tar grep # install industrial_ci dependencies
+  # for regular users: - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
+  - mkdir .industrial_ci && cp -a * .industrial_ci # this is only needed for branch testing of industrial_ci itself
+
+# setup the actual tests
+
+noetic:
+  image: ros:noetic
+  script: ./gitlab.sh
+  before_script: []
+  services: []
+  variables:
+    ISOLATION: shell
+
+dashing:
+  script: .industrial_ci/gitlab.sh ROS_DISTRO=dashing
+
+# some internal tests
+
+docker_pull:
+  script:
+    - docker pull ros:kinetic
+    - docker tag ros:kinetic industrial-ci/ubuntu:xenial
+    - .industrial_ci/gitlab.sh ROS_DISTRO=kinetic DOCKER_IMAGE="industrial-ci/ubuntu:xenial" EXPECT_EXIT_CODE=1
+
+docker_no_pull:
+  script:
+    - docker pull ros:kinetic
+    - docker tag ros:kinetic industrial-ci/ubuntu:xenial
+    - .industrial_ci/gitlab.sh ROS_DISTRO=kinetic DOCKER_IMAGE="industrial-ci/ubuntu:xenial" DOCKER_PULL=false
+
+test_arm:
+  script:
+    - docker run --rm --privileged multiarch/qemu-user-static --reset --credential yes --persistent yes
+    - .industrial_ci/gitlab.sh DOCKER_IMAGE='arm32v7/ros:melodic-ros-core' BEFORE_INIT='[[ $(uname -p) == armv7l ]] && exit 42' EXPECT_EXIT_CODE=42
+
+test_junit_docker:
+  script: .industrial_ci/gitlab.sh TARGET_WORKSPACE=". gh:ros/filters.git#HEAD"
+  variables:
+    ROS_DISTRO: noetic
+    BASEDIR: ${CI_PROJECT_DIR}/.workspaces
+  artifacts:
+    when: always
+    reports:
+      junit: ${BASEDIR}/target_ws/**/test_results/**/*.xml
+
+test_junit_shell:
+  image: ros:noetic
+  script: ./gitlab.sh TARGET_WORKSPACE=". gh:ros/filters.git#HEAD"
+  before_script: []
+  services: []
+  variables:
+    ISOLATION: shell
+    BASEDIR: ${CI_PROJECT_DIR}/.workspaces
+  artifacts:
+    when: always
+    reports:
+      junit: ${BASEDIR}/target_ws/**/test_results/**/*.xml
+

@@ -1,8 +1,0 @@
-prefix=/home/fgvt/jenkins-test/catkin_ws/devel
-
-Name: yolo_object_detector
-Description: Description of yolo_object_detector
-Version: 0.0.0
-Cflags: -I/home/fgvt/jenkins-test/catkin_ws/devel/include
-Libs: -L${prefix}/lib -lyolo_object_detector
-Requires: message_runtime roscpp rospy std_msgs

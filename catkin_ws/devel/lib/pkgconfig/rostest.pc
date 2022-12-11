@@ -1,8 +1,0 @@
-prefix=/home/fgvt/jenkins-test/catkin_ws/devel
-
-Name: rostest
-Description: Description of rostest
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
