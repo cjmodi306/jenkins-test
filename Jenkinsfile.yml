@@ -9,5 +9,5 @@ pipeline:
      - sh 'git clone https://github.com/cjmodi306/ros_ws.git'
   - stage: 'Build'
     steps:
-     - sh 'cd ros_ws/ && source devel/setup.sh'
+     - sh 'cd ros_ws/ && source "devel/setup.sh"'
      - sh 'cd ros_ws/ && catkin_make'
