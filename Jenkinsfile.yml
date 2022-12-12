@@ -1,7 +1,7 @@
 pipeline:
  agent:
   any:
-stages:
+ stages:
   - stage: 'Cloning'
     steps:
      - sh 'rm -rf ros_ws'
