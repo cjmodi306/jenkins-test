@@ -11,6 +11,7 @@ pipeline:
      - sh 'git clone https://github.com/cjmodi306/ros_ws.git'
   - stage: 'Build'
     steps:
+     - sh "echo $WS"
      - sh "ls"
      - sh 'cd $WS && source "ros_ws/devel/setup.sh"'
      - sh 'cd ros_ws/ && catkin_make'
