@@ -10,5 +10,4 @@ pipeline:
   - stage: 'Build'
     steps:
      - sh "ls"
-     - sh 'cd $WS && source "/opt/ros/setup.sh"'
-     - sh 'cd ros_ws/ && catkin_make'
+     - sh 'source /opt/ros/setup.sh && cd ros_ws && catkin_make'
