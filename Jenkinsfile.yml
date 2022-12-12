@@ -1,6 +1,8 @@
 pipeline:
  agent:
   any:
+ variables:
+  WS: "/home/modi/.jenkins/workspace/ros/"
  stages:
   - stage: 'Cloning'
     steps:
@@ -9,5 +11,5 @@ pipeline:
      - sh 'git clone https://github.com/cjmodi306/ros_ws.git'
   - stage: 'Build'
     steps:
-     - sh 'cd ros_ws/ && source "ros_ws/devel/setup.sh"'
+     - sh 'cd $WS && source "ros_ws/devel/setup.sh"'
      - sh 'cd ros_ws/ && catkin_make'
